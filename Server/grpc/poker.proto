@@ -1,0 +1,37 @@
+syntax = "proto3";
+
+message TableRoomDataRequest{
+  int64 roomId = 1;
+}
+
+message TableRoomDataResponse{
+  float buyIn = 1;
+  float smallBlind = 2;
+  float bigBlind = 3;
+  float animation = 4;
+  int32 maxPlayers = 5;
+  int32 minPlayers = 6;
+  bool status = 7;
+  string message = 8;
+}
+
+message JoinTableDataRequest {
+  int64 userId = 1;
+  string userName = 2;
+  int32 chips = 3;
+  int64 roomId = 4;
+}
+
+message JoinTableDataResponse {
+  bool status = 1;
+  string message = 2;
+  int64 tableId = 3;
+}
+
+service TableRoomDataService{
+  rpc GetTableRoomData(TableRoomDataRequest) returns (TableRoomDataResponse);
+}
+
+service TableDataService {
+  rpc GetOrCreateTable(JoinTableDataRequest) returns (JoinTableDataResponse);
+}

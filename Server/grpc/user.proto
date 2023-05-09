@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+//message for updating balance of user
+message UpdateBalanceRequest {
+  string user_id = 1;
+  float amount = 2;
+}
+
+message LockBalanceRequest {
+  int64 user_id = 1;
+  float amount = 2;
+}
+
+//message for boolean response to balance update
+message GenericResponse {
+  bool status = 1;
+  string message = 2;
+  string data = 3;
+}
+
+//service for balance update of user
+service BalanceUpdateService {
+  rpc UpdateBalance(UpdateBalanceRequest) returns (GenericResponse) {}
+}
+
+//service for locking balance of user
+service LockBalanceService {
+  rpc LockBalance(LockBalanceRequest) returns (GenericResponse) {}
+}
